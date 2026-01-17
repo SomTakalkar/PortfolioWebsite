@@ -1,0 +1,437 @@
+/* Kali Linux Theme Variables */
+:root {
+  --bg-color: #1f2229;
+  /* Dark grey like Kali background */
+  --term-bg: rgba(31, 34, 41, 0.95);
+  --text-primary: #e6e6e6;
+  --text-secondary: #268bd2;
+  /* Kali Blue */
+  --accent-blue: #268bd2;
+  --accent-cyan: #2aa198;
+  --accent-red: #dc322f;
+  --accent-green: #859900;
+  --header-bg: #2d3139;
+  --font-stack: 'Fira Code', 'Courier New', monospace;
+}
+
+/* Reset & Base */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: var(--font-stack);
+  overflow: hidden;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  background: radial-gradient(circle at center, #2b303b 0%, #1f2229 100%);
+  /* Subtle radial for depth */
+}
+
+/* Terminal Window - Kali Style */
+.terminal-window {
+  position: relative;
+  z-index: 10;
+  width: 90%;
+  max-width: 1100px;
+  height: 80vh;
+  background-color: var(--term-bg);
+  border: 1px solid #444;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  border-radius: 4px;
+  /* Sharper corners */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Scanline Effect */
+.terminal-window::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  pointer-events: none;
+  z-index: 20;
+  background: linear-gradient(to bottom,
+      rgba(18, 16, 16, 0) 50%,
+      rgba(0, 0, 0, 0.1) 50%);
+  background-size: 100% 4px;
+}
+
+/* Header - XFCE Style */
+.terminal-header {
+  background-color: var(--header-bg);
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  border-bottom: 3px solid var(--accent-blue);
+  /* Distinct Kali Blue Line */
+  flex-shrink: 0;
+  justify-content: space-between;
+}
+
+.title {
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+  flex-grow: 1;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.buttons {
+  display: flex;
+  gap: 8px;
+  order: 2;
+  /* Right aligned */
+}
+
+.btn {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  cursor: pointer;
+}
+
+.btn:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.close {
+  background-color: #dc322f;
+}
+
+.minimize {
+  background-color: #b58900;
+}
+
+.maximize {
+  background-color: #859900;
+}
+
+/* Body */
+.terminal-body {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #fff;
+}
+
+/* Content */
+.user {
+  color: var(--accent-red);
+  font-weight: bold;
+}
+
+/* Root is Red in Kali */
+.path {
+  color: var(--accent-blue);
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 2.2rem;
+  color: var(--accent-blue);
+  margin-bottom: 0.5rem;
+  border-bottom: 2px solid var(--accent-blue);
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+.hero-output {
+  margin-bottom: 2rem;
+  padding-left: 10px;
+  border-left: 3px solid var(--accent-blue);
+}
+
+.command-output {
+  margin-bottom: 1rem;
+  color: #eee;
+}
+
+.prompt-line {
+  margin-top: 10px;
+}
+
+/* Links inside dangerous HTML */
+.command-output a,
+.shortcuts a {
+  color: var(--accent-cyan);
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.command-output a:hover,
+.shortcuts a:hover {
+  color: #fff;
+  text-decoration: none;
+  background-color: var(--accent-blue);
+}
+
+/* Input */
+.input-line {
+  display: flex;
+  margin-top: 5px;
+}
+
+input {
+  flex-grow: 1;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-family: inherit;
+  font-size: inherit;
+  margin-left: 10px;
+  outline: none;
+  caret-color: var(--accent-blue);
+  font-weight: bold;
+}
+
+/* Shortcuts */
+.shortcuts {
+  margin-top: 2rem;
+  border-top: 1px dashed #555;
+  padding-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.shortcuts a {
+  cursor: pointer;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #444;
+  border: 1px solid var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-blue);
+}
+
+/* Maximized State */
+.maximized {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  border-radius: 0 !important;
+  z-index: 100 !important;
+  border: none;
+  top: 0;
+  left: 0;
+}
+
+/* Dock/Taskbar - Kali Style */
+.dock-container {
+  position: absolute;
+  bottom: 20px;
+  /* Floating slightly above bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+.dock-glass {
+  display: flex;
+  gap: 15px;
+  padding: 10px 20px;
+  background: rgba(45, 49, 57, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.dock-icon-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dock-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s;
+}
+
+.active-dot {
+  width: 4px;
+  height: 4px;
+  background-color: var(--text-secondary);
+  border-radius: 50%;
+  margin-top: 4px;
+}
+
+.icon-tooltip {
+  position: absolute;
+  top: -30px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.dock-icon-wrapper:hover .icon-tooltip {
+  opacity: 1;
+}
+
+/* File Explorer Window */
+.file-explorer-window {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 400px;
+  background-color: var(--term-bg);
+  border: 1px solid #444;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  z-index: 500;
+  overflow: hidden;
+}
+
+.explorer-header {
+  background: var(--header-bg);
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #444;
+}
+
+.explorer-body {
+  display: flex;
+  flex-grow: 1;
+}
+
+.explorer-sidebar {
+  width: 150px;
+  background: rgba(0, 0, 0, 0.2);
+  border-right: 1px solid #444;
+  padding: 10px;
+}
+
+.sidebar-item {
+  padding: 8px 12px;
+  color: #aaa;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-bottom: 2px;
+}
+
+.sidebar-item:hover,
+.sidebar-item.active {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+.explorer-content {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.file-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 20px;
+}
+
+.file-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.file-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.file-icon {
+  width: 48px;
+  height: 56px;
+  background: #ccc;
+  border-radius: 4px;
+  position: relative;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #333;
+  font-size: 0.8rem;
+}
+
+.file-icon.pdf {
+  background: #dc322f;
+  color: white;
+}
+
+.file-icon.txt {
+  background: #f1c40f;
+  color: black;
+}
+
+.file-name {
+  font-size: 0.85rem;
+  text-align: center;
+  word-break: break-all;
+  color: #eee;
+}
