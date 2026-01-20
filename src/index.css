@@ -19,7 +19,8 @@ html,
 body {
   margin: 0;
   padding: 0;
-  height: 100vh;
+  height: 100dvh;
+  /* Mobile viewport fix */
   width: 100vw;
   background-color: var(--bg-color);
   color: var(--text-primary);
@@ -49,7 +50,10 @@ body {
   z-index: 10;
   width: 90%;
   max-width: 1100px;
-  height: 80vh;
+  height: 75vh;
+  /* Slightly reduced height to make room */
+  margin-bottom: 5vh;
+  /* Shift up slightly */
   background-color: var(--term-bg);
   border: 1px solid #444;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
@@ -59,6 +63,11 @@ body {
   flex-direction: column;
   overflow: hidden;
 }
+
+/* ... (Scanline and Header styles remain same) ... */
+
+/* Dock/Taskbar - Kali Style */
+
 
 /* Scanline Effect */
 .terminal-window::before {
@@ -262,8 +271,8 @@ input {
 /* Dock/Taskbar - Kali Style */
 .dock-container {
   position: absolute;
-  bottom: 20px;
-  /* Floating slightly above bottom */
+  bottom: max(60px, env(safe-area-inset-bottom) + 40px);
+  /* Moved up for mobile */
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
