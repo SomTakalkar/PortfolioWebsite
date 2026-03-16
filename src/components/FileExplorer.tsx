@@ -6,15 +6,6 @@ interface Props {
 }
 
 const FileExplorer: React.FC<Props> = ({ onClose }) => {
-    // Placeholder function for download - allows user to drop actual file later
-    const handleDownload = () => {
-        const link = document.createElement('a');
-        link.href = '/Resume.pdf'; // Matches file in public folder
-        link.download = 'Som_Takalkar_Resume.pdf';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    };
 
     return (
         <motion.div
@@ -42,10 +33,17 @@ const FileExplorer: React.FC<Props> = ({ onClose }) => {
 
                 <div className="explorer-content">
                     <div className="file-grid">
-                        <div className="file-item" onClick={handleDownload}>
+                        <a 
+                            href={`${import.meta.env.BASE_URL}Resume.pdf`}
+                            download="Som_Takalkar_Resume.pdf" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="file-item" 
+                            style={{ textDecoration: 'none' }}
+                        >
                             <div className="file-icon pdf">PDF</div>
                             <span className="file-name">Resume.pdf</span>
-                        </div>
+                        </a>
                         {/* Placeholder for future files */}
                         <div className="file-item" style={{ opacity: 0.5 }}>
                             <div className="file-icon txt">TXT</div>

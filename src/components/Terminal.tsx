@@ -180,7 +180,13 @@ const Terminal: React.FC<Props> = ({ windowState, onClose, onMinimize, onMaximiz
 
                         {/* History */}
                         {history.map((item) => (
-                            <div key={item.id} className="history-item">
+                            <motion.div
+                                key={item.id}
+                                className="history-item"
+                                initial={{ opacity: 0, y: 15 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.3 }}
+                            >
                                 {item.type === 'command' ? (
                                     <div className="prompt-line">
                                         <span className="user">root@kali</span>:<span className="path">~</span>$ {item.cmd}
@@ -192,7 +198,7 @@ const Terminal: React.FC<Props> = ({ windowState, onClose, onMinimize, onMaximiz
                                         <div className="command-output">{item.content}</div>
                                     )
                                 )}
-                            </div>
+                            </motion.div>
                         ))}
 
                         {/* Input Line */}

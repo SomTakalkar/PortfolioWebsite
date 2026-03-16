@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Terminal from './components/Terminal';
 import Background3D from './components/Background3D';
 import Dock from './components/Dock';
@@ -8,6 +8,11 @@ import type { WindowState } from './types';
 function App() {
   const [windowState, setWindowState] = useState<WindowState>('normal');
   const [showFiles, setShowFiles] = useState(false);
+  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
 
   const handleClose = () => setWindowState('closed');
   const handleMinimize = () => setWindowState('minimized');
@@ -24,10 +29,11 @@ function App() {
 
   // Toggle Files: If open -> close. If closed -> open.
   const handleToggleFiles = () => setShowFiles(prev => !prev);
+  const handleToggleTheme = () => setTheme(prev => prev === 'dark' ? 'light' : 'dark');
 
   return (
     <div className="app-container">
-      <Background3D />
+      <Background3D theme={theme} />
 
       {windowState !== 'minimized' && windowState !== 'closed' && (
         <Terminal
@@ -45,6 +51,8 @@ function App() {
         windowState={windowState}
         onFilesClick={handleToggleFiles}
         filesOpen={showFiles}
+        onToggleTheme={handleToggleTheme}
+        theme={theme}
       />
     </div>
   );

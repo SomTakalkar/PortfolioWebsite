@@ -7,9 +7,11 @@ interface DockProps {
     onFilesClick: () => void;
     windowState: WindowState;
     filesOpen: boolean;
+    onToggleTheme: () => void;
+    theme: 'dark' | 'light';
 }
 
-const Dock: React.FC<DockProps> = ({ onTerminalClick, onFilesClick, windowState, filesOpen }) => {
+const Dock: React.FC<DockProps> = ({ onTerminalClick, onFilesClick, windowState, filesOpen, onToggleTheme, theme }) => {
     return (
         <div className="dock-container">
             <div className="dock-glass">
@@ -29,6 +31,15 @@ const Dock: React.FC<DockProps> = ({ onTerminalClick, onFilesClick, windowState,
                     onClick={onFilesClick}
                     icon="📁"
                     color="#f1c40f"
+                />
+
+                {/* Theme Toggle Icon */}
+                <DockIcon
+                    label={`Theme: ${theme === 'dark' ? 'Light' : 'Dark'}`}
+                    isActive={false}
+                    onClick={onToggleTheme}
+                    icon={theme === 'dark' ? '☀️' : '🌙'}
+                    color={theme === 'dark' ? '#f39c12' : '#34495e'}
                 />
             </div>
         </div>

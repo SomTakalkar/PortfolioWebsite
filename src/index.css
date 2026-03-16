@@ -11,7 +11,23 @@
   --accent-red: #dc322f;
   --accent-green: #859900;
   --header-bg: #2d3139;
+  --header-text: #ffffff;
   --font-stack: 'Fira Code', 'Courier New', monospace;
+  --font-heading: 'Outfit', sans-serif;
+}
+
+/* Light Mode Theme Variables */
+[data-theme='light'] {
+  --bg-color: #f0f2f5;
+  --term-bg: rgba(255, 255, 255, 0.95);
+  --text-primary: #24292e;
+  --text-secondary: #0366d6;
+  --accent-blue: #0366d6;
+  --accent-cyan: #005cc5;
+  --accent-red: #d73a49;
+  --accent-green: #28a745;
+  --header-bg: #e1e4e8;
+  --header-text: #24292e;
 }
 
 /* Reset & Base */
@@ -26,6 +42,7 @@ body {
   color: var(--text-primary);
   font-family: var(--font-stack);
   overflow: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 #root {
@@ -40,8 +57,16 @@ body {
   height: 100%;
   width: 100%;
   position: relative;
-  background: radial-gradient(circle at center, #2b303b 0%, #1f2229 100%);
-  /* Subtle radial for depth */
+  /* Dynamic Background Configuration */
+  background: linear-gradient(135deg, var(--bg-color), var(--header-bg), var(--bg-color));
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* Terminal Window - Kali Style */
@@ -55,13 +80,15 @@ body {
   margin-bottom: 5vh;
   /* Shift up slightly */
   background-color: var(--term-bg);
-  border: 1px solid #444;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-  border-radius: 4px;
-  /* Sharper corners */
+  border: 1px solid rgba(100, 100, 100, 0.2);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  /* Sharper corners -> more modern border-radius */
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* ... (Scanline and Header styles remain same) ... */
@@ -99,12 +126,12 @@ body {
 }
 
 .title {
-  color: #fff;
+  color: var(--header-text);
+  font-family: var(--font-heading);
   font-size: 0.95rem;
   font-weight: 600;
   text-align: center;
   flex-grow: 1;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .buttons {
@@ -148,7 +175,7 @@ body {
   overflow-y: auto;
   font-size: 1rem;
   line-height: 1.5;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 /* Content */
@@ -164,6 +191,7 @@ body {
 }
 
 h1 {
+  font-family: var(--font-heading);
   font-size: 2.2rem;
   color: var(--accent-blue);
   margin-bottom: 0.5rem;
@@ -180,7 +208,7 @@ h1 {
 
 .command-output {
   margin-bottom: 1rem;
-  color: #eee;
+  color: var(--text-primary);
 }
 
 .prompt-line {
@@ -213,7 +241,7 @@ input {
   flex-grow: 1;
   background: transparent;
   border: none;
-  color: #fff;
+  color: var(--text-primary);
   font-family: inherit;
   font-size: inherit;
   margin-left: 10px;
@@ -282,11 +310,12 @@ input {
   display: flex;
   gap: 15px;
   padding: 10px 20px;
-  background: rgba(45, 49, 57, 0.7);
+  background: var(--header-bg);
   backdrop-filter: blur(10px);
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
 }
 
 .dock-icon-wrapper {
@@ -305,8 +334,8 @@ input {
   justify-content: center;
   align-items: center;
   font-size: 24px;
-  color: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  color: var(--bg-color);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s;
 }
 
@@ -344,6 +373,8 @@ input {
   transform: translate(-50%, -50%);
   width: 600px;
   height: 400px;
+  max-width: 95vw;
+  max-height: 85vh;
   background-color: var(--term-bg);
   border: 1px solid #444;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
@@ -443,4 +474,117 @@ input {
   text-align: center;
   word-break: break-all;
   color: #eee;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .terminal-window {
+    width: 95%;
+    height: 82vh;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  .terminal-body {
+    padding: 15px;
+    font-size: 0.95rem;
+  }
+
+  .dock-glass {
+    padding: 8px 15px;
+    gap: 12px;
+  }
+
+  .dock-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 22px;
+  }
+
+  .explorer-sidebar {
+    width: 120px;
+  }
+  
+  .shortcuts {
+    gap: 10px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .terminal-window {
+    width: 100%;
+    height: 100dvh;
+    border-radius: 0;
+    margin-bottom: 0;
+    max-width: none;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .terminal-body {
+    padding: 10px;
+    font-size: 0.85rem;
+  }
+
+  .dock-glass {
+    padding: 6px 12px;
+    gap: 8px;
+    border-radius: 12px;
+  }
+
+  .dock-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    border-radius: 8px;
+  }
+  
+  .dock-container {
+    bottom: max(15px, env(safe-area-inset-bottom) + 5px);
+    width: 90%; /* prevent dock from overflowing tight screens */
+    display: flex;
+    justify-content: center;
+  }
+
+  .file-explorer-window {
+    width: 98vw;
+    height: 90dvh;
+    border-radius: 8px; /* Slightly nicer corners on mobile */
+  }
+  
+  .explorer-sidebar {
+    width: 80px;
+    font-size: 0.8rem;
+    padding: 2px;
+  }
+  
+  .sidebar-item {
+    padding: 4px 6px;
+    text-align: center;
+  }
+  
+  .file-grid {
+    grid-template-columns: repeat(auto-fill, minmax(65px, 1fr));
+    gap: 10px;
+    padding: 10px;
+  }
+  
+  .explorer-content {
+    padding: 10px;
+  }
+  
+  .file-icon {
+    width: 40px;
+    height: 48px;
+    font-size: 0.7rem;
+  }
+  
+  .file-name {
+    font-size: 0.75rem;
+  }
 }

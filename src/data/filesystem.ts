@@ -55,11 +55,32 @@ export const fileSystem: Record<string, FileContent> = {
     },
     'projects': {
         type: 'shortcut', // Treated as a special command or file
-        content: `<p>1. <strong>Instagram Clone</strong> (React, Vite, Firebase): <a href="https://github.com/SomTakalkar/instagram_clone.git" target="_blank" rel="noopener noreferrer">View</a></p>
-              <p>2. <strong>Calculator</strong> (React.js): <a href="https://github.com/SomTakalkar/calculator-app.git" target="_blank" rel="noopener noreferrer">View</a></p>
-              <p>3. <strong>Tic Tac Toe with AI</strong> (Minimax, React, Node.js): <a href="https://github.com/SomTakalkar/AI_TicTacToe.git" target="_blank" rel="noopener noreferrer">View</a></p>
-              <p>4. <strong>Ansible Playbook</strong> (Automation): <a href="https://github.com/SomTakalkar/ansible_demo1.git" target="_blank" rel="noopener noreferrer">View</a></p>
-              <p>5. <strong>Password Manager</strong> (React, Node, Vault, AES-256): <a href="https://github.com/SomTakalkar/Password_Manager" target="_blank" rel="noopener noreferrer">View</a></p>`
+        content: `<p style="display:flex; align-items:center; flex-wrap:wrap; gap:6px;">1. <strong>Instagram Clone</strong> 
+                <img src="https://img.shields.io/badge/react-%2320232a.svg?style=flat&logo=react&logoColor=%2361DAFB" height="20">
+                <img src="https://img.shields.io/badge/vite-%23646CFF.svg?style=flat&logo=vite&logoColor=white" height="20">
+                <img src="https://img.shields.io/badge/firebase-%23039BE5.svg?style=flat&logo=firebase" height="20">
+                <a href="https://github.com/SomTakalkar/instagram_clone.git" target="_blank" rel="noopener noreferrer" style="margin-left:auto;">[ View ]</a></p>
+              
+              <p style="display:flex; align-items:center; flex-wrap:wrap; gap:6px;">2. <strong>Calculator</strong> 
+                <img src="https://img.shields.io/badge/react-%2320232a.svg?style=flat&logo=react&logoColor=%2361DAFB" height="20">
+                <a href="https://github.com/SomTakalkar/calculator-app.git" target="_blank" rel="noopener noreferrer" style="margin-left:auto;">[ View ]</a></p>
+              
+              <p style="display:flex; align-items:center; flex-wrap:wrap; gap:6px;">3. <strong>AI Tic Tac Toe</strong> 
+                <span style="font-size:0.85em; background:#444; color:#fff; padding:2px 6px; border-radius:4px;">Minimax</span>
+                <img src="https://img.shields.io/badge/react-%2320232a.svg?style=flat&logo=react&logoColor=%2361DAFB" height="20">
+                <img src="https://img.shields.io/badge/node.js-6DA55F?style=flat&logo=node.js&logoColor=white" height="20">
+                <a href="https://github.com/SomTakalkar/AI_TicTacToe.git" target="_blank" rel="noopener noreferrer" style="margin-left:auto;">[ View ]</a></p>
+              
+              <p style="display:flex; align-items:center; flex-wrap:wrap; gap:6px;">4. <strong>Ansible Playbook</strong> 
+                <img src="https://img.shields.io/badge/ansible-%231A1918.svg?style=flat&logo=ansible&logoColor=white" height="20">
+                <a href="https://github.com/SomTakalkar/ansible_demo1.git" target="_blank" rel="noopener noreferrer" style="margin-left:auto;">[ View ]</a></p>
+              
+              <p style="display:flex; align-items:center; flex-wrap:wrap; gap:6px;">5. <strong>Password Manager</strong> 
+                <img src="https://img.shields.io/badge/react-%2320232a.svg?style=flat&logo=react&logoColor=%2361DAFB" height="20">
+                <img src="https://img.shields.io/badge/node.js-6DA55F?style=flat&logo=node.js&logoColor=white" height="20">
+                <img src="https://img.shields.io/badge/vault-%23000000.svg?style=flat&logo=vault&logoColor=white" height="20">
+                <span style="font-size:0.85em; background:#444; color:#fff; padding:2px 6px; border-radius:4px;">AES-256</span>
+                <a href="https://github.com/SomTakalkar/Password_Manager" target="_blank" rel="noopener noreferrer" style="margin-left:auto;">[ View ]</a></p>`
     },
     'certificates': {
         type: 'file',

@@ -4,7 +4,7 @@ import { Points, PointMaterial, Text } from '@react-three/drei';
 import * as THREE from 'three';
 
 // Network Nodes (Static Constellation)
-function NetworkParticles({ count = 200 }) {
+function NetworkParticles({ count = 200, theme = 'dark' }: { count?: number, theme?: 'dark' | 'light' }) {
     const pointsRef = useRef<THREE.Points>(null!);
 
     const particles = useMemo(() => {
@@ -30,7 +30,7 @@ function NetworkParticles({ count = 200 }) {
             <Points ref={pointsRef} positions={particles} stride={3} frustumCulled={false}>
                 <PointMaterial
                     transparent
-                    color="#268bd2" // Kali Blue
+                    color={theme === 'dark' ? "#268bd2" : "#0366d6"} // Kali Blue or Light Blue
                     size={0.08}
                     sizeAttenuation={true}
                     depthWrite={false}
@@ -43,7 +43,7 @@ function NetworkParticles({ count = 200 }) {
 
 // Data Packets (Moving Cubes representing Traffic)
 // Protocol Text Packets (Moving Text representing Traffic)
-function ProtocolTextPackets({ count = 25 }) {
+function ProtocolTextPackets({ count = 25, theme = 'dark' }: { count?: number, theme?: 'dark' | 'light' }) {
     const groupRef = useRef<THREE.Group>(null!);
 
     const protocols = ['TCP', 'UDP', 'BGP', 'OSPF', 'ICMP', 'SSH', 'DNS', 'HTTP', 'SYN', 'ACK', 'HANDSHAKE', 'SSL', 'ARP'];
@@ -64,13 +64,13 @@ function ProtocolTextPackets({ count = 25 }) {
     return (
         <group ref={groupRef}>
             {packetData.map((data, i) => (
-                <SingleTextPacket key={i} speed={data.speed} offset={data.offset} vector={data.vector} text={data.text} />
+                <SingleTextPacket key={i} speed={data.speed} offset={data.offset} vector={data.vector} text={data.text} theme={theme} />
             ))}
         </group>
     )
 }
 
-function SingleTextPacket({ speed, offset, vector, text }: { speed: number, offset: number, vector: THREE.Vector3, text: string }) {
+function SingleTextPacket({ speed, offset, vector, text, theme }: { speed: number, offset: number, vector: THREE.Vector3, text: string, theme: 'dark' | 'light' }) {
     const meshRef = useRef<THREE.Mesh>(null!);
 
     useFrame((state) => {
@@ -90,7 +90,7 @@ function SingleTextPacket({ speed, offset, vector, text }: { speed: number, offs
     return (
         <Text
             ref={meshRef}
-            color="#dc322f" // Kali Red
+            color={theme === 'dark' ? "#dc322f" : "#d73a49"} // Kali Red or Light Red
             fontSize={0.2}
             maxWidth={2}
             lineHeight={1}
@@ -99,22 +99,22 @@ function SingleTextPacket({ speed, offset, vector, text }: { speed: number, offs
             anchorX="center"
             anchorY="middle"
             outlineWidth={0.01}
-            outlineColor="#1f2229"
+            outlineColor={theme === 'dark' ? "#1f2229" : "#f0f2f5"}
         >
             {text}
         </Text>
     );
 }
 
-export default function Background3D() {
+export default function Background3D({ theme = 'dark' }: { theme?: 'dark' | 'light' }) {
     return (
         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }}>
             <Canvas camera={{ position: [0, 0, 8], fov: 60 }}>
-                <fog attach="fog" args={['#1f2229', 5, 20]} />
+                <fog attach="fog" args={[theme === 'dark' ? '#1f2229' : '#f0f2f5', 5, 20]} />
                 <ambientLight intensity={0.2} />
                 <pointLight position={[10, 10, 10]} intensity={1} />
-                <NetworkParticles count={400} />
-                <ProtocolTextPackets count={30} />
+                <NetworkParticles count={400} theme={theme} />
+                <ProtocolTextPackets count={30} theme={theme} />
             </Canvas>
         </div>
     );
