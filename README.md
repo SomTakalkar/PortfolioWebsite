@@ -1,5 +1,8 @@
 # Som Takalkar - Portfolio Website
 
+![Live Preview](https://img.shields.io/badge/Live-Website-success?style=for-the-badge&logoColor=white) 
+**[View Live Website Here](https://somtakalkar.github.io/PortfolioWebsite/)**
+
 An interactive, terminal-themed portfolio website serving as a digital resume and showcase of my work as a Network Engineer and Developer.
 
 ## 🚀 Features
